@@ -38,6 +38,7 @@ Or you can press __Windows + R__ on your keyboard and type `powershell`.
 6. Verify your WSL installation by typing `wsl --status` to check your WSL status and `wsl --version` to verify your wsl version.
 
 ![wsl status and version](/images/wsl-version.png)
+
 7. Your WSL is complete and ready to use.
 
 ## 👨‍💻 Dockerizing Node.js App
