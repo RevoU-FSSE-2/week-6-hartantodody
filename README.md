@@ -96,6 +96,7 @@ server.listen(port, hostname, () => {
 });
 ```
 2. Place it in the same directory as the _package.json_.
+3. Pay attention to the port variable, make sure the port is the same with the ___Dockerfile___ we will create after this.
 
 ### 3. Create Dockerfile
 1. Still in the same directory with the _package.json_ and _package-lock.json_ file, create _Dockerfile_ using one of these methods :
