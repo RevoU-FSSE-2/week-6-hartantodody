@@ -6,17 +6,19 @@ First thing first, we need to virtualized docker by installing Windows Subsystem
 
 ## 🐳 Installing Docker 
 1. Download [Docker](https://https://www.docker.com/).
-![](/images/download-docker.png)
+![download docker](/images/download-docker.png)
 2. Double click on __Docker Desktop Installer.exe__ to install the application.
-![](/images/installer.png)
+![installer](/images/installer.png)
 3. Click agree and next to continue the installation.
-![](/images/install-docker.png)
+![run installation](/images/install-docker.png)
 4. Wait until the installation is finished.
 5. Restart your PC to complete the installation process.
 6. Open your Terminal (ex : Windows Powershell) and run it as an administrator.
 Or you can press __Windows + R__ on your keyboard and type `powershell`.
-![](/images/powershell-run_as_admin.png)
-7. Type `docker --version` to check the Dcoker version and your installation is complete.
+
+![run powershell as administrator](/images/powershell-run_as_admin.png)
+
+7. Type `docker --version` to check the Docker version and your installation is complete.
 ![docker version](/images/docker--version.png)
 
 ## 🖥️ Installing Windows Subsytem for Linux
