@@ -1,6 +1,4 @@
-
-
-## Creating Node.js web app with Docker
+# Creating Node.js web app with Docker
 
 Creating [Node.js](https://nodejs.org/en) app with [Docker](https://www.docker.com/) (or we can call it "Dockerizing Node.js app) can be a win-win solution for every software engineers, developers, students, etc, because of the _"it can be opened everywhere"_ trait, as long as the Docker installed within the Hardware. Before we jump into detail about creating and running this Node.js app with Docker, there are two general steps on how we are going to Dockerize the Node.js web app. 
 
@@ -8,13 +6,18 @@ First thing first, we need to virtualized docker by installing Windows Subsystem
 
 ## 🐳 Installing Docker 
 1. Download [Docker](https://https://www.docker.com/).
+![](/images/download-docker.png)
 2. Double click on __Docker Desktop Installer.exe__ to install the application.
-3. Click next to continue the installation.
+![](/images/installer.png)
+3. Click agree and next to continue the installation.
+![](/images/install-docker.png)
 4. Wait until the installation is finished.
 5. Restart your PC to complete the installation process.
 6. Open your Terminal (ex : Windows Powershell) and run it as an administrator.
 Or you can press __Windows + R__ on your keyboard and type `powershell`.
+![](/images/powershell-run_as_admin.png)
 7. Type `docker --version` to check the Dcoker version and your installation is complete.
+![docker version](/images/docker--version.png)
 
 ## 🖥️ Installing Windows Subsytem for Linux
 1. Open your terminal (ex : Windows Powershell) and run it as an administrator.
@@ -24,12 +27,16 @@ Or you can press __Windows + R__ on your keyboard and type `powershell`.
 3. Wait until the installation is finished.
 4. You can enable WSL using one of the two methods, from __Control Panel__ or using Terminal.
 - From Control Panel : 
-    - open Start -> Control Panel -> All Control Panel Items -> Programs and Features -> Turn Windows features on or off, find and check Windows Subsystem for Linux and Virtual Machine Platform.
+    - Open Start -> Control Panel -> All Control Panel Items -> Programs and Features -> Turn Windows features on or off, find and check Windows Subsystem for Linux and Virtual Machine Platform.
+    ![enable wsl vmp](/images/enable.png)
 - With Terminal :
     - `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+    ![enable wsl](/images/enable-wsl-pws.png)
     - `Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform`
+    ![enable vmp](/images/enable-vmp.png)
 5. Restart your PC to complete the installation process.
 6. Verify your WSL installation by typing `wsl --status` to check your WSL status and `wsl --version` to verify your wsl version.
+![wsl status and version](/images/wsl-version.png)
 7. Your WSL is complete and ready to use.
 
 ## 👨‍💻 Dockerizing Node.js App
@@ -38,9 +45,9 @@ Like i said above, in this example we are not going to create a new node.js app,
 
 
 ### 1. Create Package.json
-1. Create a new directory to store all of your files. You can do it by 
+1. Create a new directory to store all of your files. You can do it by :
 - default using _File Explorer_ and go to your preferred destination, and create a new folder by right clicking your mouse and then create new folder 
-- you can open your favourite terminal and type `cd <folder destination>` to change the directory and then type `mkdir <folder name>` to create a new folder.
+- opening your favourite terminal and type `cd <folder destination>` to change the directory and then type `mkdir <folder name>` to create a new folder.
 2. Open your IDE (ex : Visual Studio Code), open folder from your recent directory you have created.
 3. Create a new _package.json_ file to describe the app, it shows like in the code block below.
 ```
@@ -56,25 +63,46 @@ Like i said above, in this example we are not going to create a new node.js app,
     }
 }
 ```
-Here is a brief explanation of the code
+Here is a brief explanation of the syntax :
 | Object | Property |
 | ----------- | ----------- |
 | name | name of the app |
 | version | version release of the app |
 | description | description of the app |
 | author | author of the app |
+| main | the node.js app name |
 | scripts | collection of script include in the package |
 | start | runtime to start the app |
 
 4. With your new _package.json_ file you have created, type `npm install`.
 5. It will create a _package-lock.json_ file that will copied to your Docker image.
 
+### 2. Create Node.js App
+1. Download __[Node.js](https://gist.github.com/berdoezt/e51718982926f0caa3fcd8ed45111430)__ app. The code block will be shown below.
+```
+const http = require('http');
 
-### 2. Create Dockerfile
+const hostname = '0.0.0.0';
+const port = 3001;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+2. Place it in the same directory as the _package.json_.
+
+### 3. Create Dockerfile
 1. Still in the same directory with the _package.json_ and _package-lock.json_ file, create _Dockerfile_ using one of these methods :
 - Using Powershell : `<directory>/Dockerfile -ItemType File`.
 - Inside Virtual Studio Code folder by hovering the folder name and clink new file.
 2. Inside the Dockerfile, type like the code block below. The description will be shown before the code block.
+
 | Syntax | Explanation | 
 | ----------- | ----------- |
 | FROM | Choosing the base image to build |
@@ -85,26 +113,33 @@ Here is a brief explanation of the code
 | CMD | Defining the  runtime system command to run the app in cmd |
 
 
-- Using the latest LTS (long term support) version ___18___ of ___node___ 
-`FROM node:18` 
+- `FROM node:18` 
+Using the latest LTS (long term support) version ___18___ of ___node___ 
 
-- Creating directory _/app_ as the working directory
-`WORKDIR /app`
 
-- To ensure the _package-lock.json_ copied into the image when the installed npm is version 4 or earlier, because it will not generate _package-lock.json_.
-`COPY package*.json ./`
+- `WORKDIR /app` 
+Creating directory _/app_ as the working directory
 
-- Using . to select all files inside the directory.
-`COPY . .`
 
-- To execute the ___Node.js app we've already downloaded___.
-`RUN npm install`
+- `COPY package*.json ./`
+To ensure the _package-lock.json_ copied into the image when the installed npm is version 4 or earlier, because it will not generate _package-lock.json_.
 
-- Using 3001 because the port that used in the app.js is 3001
-`EXPOSE 3001`
 
-- Choosing the runtime syntax is simply because it uses node and the name of the app is app.js 
-`CMD [ "node", "app.js" ]`
+- `COPY . .`
+Using . to select all files inside the directory.
+
+
+- `RUN npm install` 
+To execute the ___Node.js app we've already downloaded___.
+
+
+- `EXPOSE 3001`
+Using 3001 because the port that used in the app.js is 3001
+
+
+- `CMD [ "node", "app.js" ]`
+Choosing the runtime syntax is simply because it uses node and the name of the app is app.js 
+
 
 The file will be like this.
 ```
@@ -133,9 +168,15 @@ CMD [ "node", "app.js" ]
 ```
 3. Save the file, and the last file is done. 
 
-### Build and Run the app.js Image
+### 4. Build and Run the app.js Image
 1. Open your preferred terminal.
 2. Build the image by typing `docker build . -t <your username>/<app name>`.
+![build complete](/images/build-complete.png)
 3. After finished building the image, check your image by typing `docker images`.
+![check images](/images/docker-images.png)
 4. Run it by typing `docker run -p <choose your port>:3001 -d <your username>/<app-name>`.
-5. Open your browser, and type localhost:<your port that you have chosen when running the app>. For example like the picture below.
+![docker run](/images/docker-run.png)
+5. Verify image that you have just run by typing `docker ps` to see it is running properly.
+![verify image running properlu](/images/docker-ps.png)
+6. Open your browser, and type `localhost:<your port that you have chosen when running the app>`. You can see the result it running succesfully like the image below.
+![docker running successfully](/images/helloworld.png)
