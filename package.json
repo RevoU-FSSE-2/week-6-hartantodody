@@ -1,0 +1,11 @@
+{
+    "name": "docker-nodejs-app",
+    "version": "1.0.0",
+    "description": "assignment 6 : Docker on NodeJs app",
+    "author": "Dody Hartanto <muharridody@gmail.com>",
+    "main": "app.js",
+    "scripts": 
+    {
+      "start": "node app.js"
+    }
+}
