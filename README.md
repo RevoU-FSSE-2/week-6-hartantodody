@@ -30,12 +30,13 @@ Or you can press __Windows + R__ on your keyboard and type `powershell`.
     - Open Start -> Control Panel -> All Control Panel Items -> Programs and Features -> Turn Windows features on or off, find and check Windows Subsystem for Linux and Virtual Machine Platform.
     ![enable wsl vmp](/images/enable.png)
 - With Terminal :
-    - `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+    - `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`.
     ![enable wsl](/images/enable-wsl-pws.png)
-    - `Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform`
+    - `Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform`.
     ![enable vmp](/images/enable-vmp.png)
 5. Restart your PC to complete the installation process.
 6. Verify your WSL installation by typing `wsl --status` to check your WSL status and `wsl --version` to verify your wsl version.
+
 ![wsl status and version](/images/wsl-version.png)
 7. Your WSL is complete and ready to use.
 
