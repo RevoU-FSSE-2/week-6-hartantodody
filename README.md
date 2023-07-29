@@ -2,7 +2,7 @@
 
 Creating [Node.js](https://nodejs.org/en) app with [Docker](https://www.docker.com/) (or we can call it "Dockerizing Node.js app) can be a win-win solution for every software engineers, developers, students, etc, because of the _"it can be opened everywhere"_ trait, as long as the Docker installed within the Hardware. Before we jump into detail about creating and running this Node.js app with Docker, there are two general steps on how we are going to Dockerize the Node.js web app. 
 
-First thing first, we need to virtualized docker by installing Windows Subsystem for Linux (WSL) and [Docker](https://www.docker.com/). And the second part is creating Dockerizing the Node.js web app. In this case we will create images with an existing app that have already provided by my instructor.
+First thing first, we need to virtualized docker by installing Windows Subsystem for Linux (WSL) and [Docker](https://www.docker.com/). And the second part is  Dockerizing the Node.js web app. In this case we will create images with an existing app that have already provided by my instructor.
 
 ## 🐳 Installing Docker 
 1. Download [Docker](https://https://www.docker.com/).
@@ -14,7 +14,7 @@ First thing first, we need to virtualized docker by installing Windows Subsystem
 4. Wait until the installation is finished.
 5. Restart your PC to complete the installation process.
 6. Open your Terminal (ex : Windows Powershell) and run it as an administrator.
-Or you can press __Windows + R__ on your keyboard and type `powershell`.
+Or you can press __Windows + R__ on your keyboard and type `powershell`, press ctrl + shift + enter to run the command and press Yes to continue.
 
 ![run powershell as administrator](/images/powershell-run_as_admin.png)
 
@@ -23,7 +23,7 @@ Or you can press __Windows + R__ on your keyboard and type `powershell`.
 
 ## 🖥️ Installing Windows Subsytem for Linux
 1. Open your terminal (ex : Windows Powershell) and run it as an administrator.
-Or you can press __Windows + R__ on your keyboard and type `powershell`.
+Or you can press __Windows + R__ on your keyboard and type `powershell`, press ctrl + shift + enter to run the command and press Yes to continue.
 
 2. type `wsl --install` to start installing your Windows Subsystem for Linux.
 3. Wait until the installation is finished.
